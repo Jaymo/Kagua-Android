@@ -1,4 +1,16 @@
-Kagua
-=====
+![Kagua](https://github.com/Jaymo/Kagua/blob/master/res/drawable-hdpi/ic_launcher.png) Kagua-Android
+======================================================================================================
+Welcome to **"Kagua Repository"**
+An Online Kenyan Tv show and Local Movie listing App. Summited to Safaricom App Whiz and shortlisted in the Semifinalist Round
 
-An Online Tv show listing Software
+
+The app features,once complete, will feature Movies ,Episodes and allow you to favourite each of them
+
+##Libraries used in this project
+
+1.HoloEverwhere [here][1].
+2.Action Bar sherlock [here][2].
+
+[1]: http://www.holoeverywhere.com/
+[2]: http://actionbarsherlock.com/
+
