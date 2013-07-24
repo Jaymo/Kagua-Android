@@ -1,4 +1,4 @@
-![Kagua](https://github.com/Jaymo/Kagua/blob/master/res/drawable-hdpi/ic_launcher.png) Kagua-Android
+![Kagua](http://i42.tinypic.com/313t72f.png) Kagua-Android
 ======================================================================================================
 Welcome to **"Kagua Repository"**
 An Online Kenyan Tv show and Local Movie listing App. Summited to Safaricom App Whiz and shortlisted in the Semifinalist Round
