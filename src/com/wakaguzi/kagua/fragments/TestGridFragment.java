@@ -3,7 +3,6 @@ package com.wakaguzi.kagua.fragments;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -32,7 +31,6 @@ import com.wakaguzi.kagua.KaguaApplication;
 import com.wakaguzi.kagua.R;
 import com.wakaguzi.kagua.adapters.GridAdapter;
 import com.wakaguzi.kagua.data.KaguaDB;
-import com.wakaguzi.kagua.models.HomeViewModel;
 import com.wakaguzi.kagua.parsers.JSONfunctions;
 
 
@@ -161,26 +159,17 @@ public class TestGridFragment  extends Fragment {
 								 mVisit=o.get(KEY_LAST_VISIT);
 								 mURL=o.get(KEY_IMAGE_URL);
 								 
-								 Log.v("mName", mNAME);
+								 //Log.v("mName", mNAME);
 								 
 								//Insert Logic
 				        		ContentValues values = new ContentValues();
-			                	values.put(KaguaDB.KEY_NAME, mNAME);
-			                	values.put(KaguaDB.KEY_PHONE, mPHONE);
-			                	values.put(KaguaDB.KEY_LAST_VISIT, mVisit);
-			                	values.put(KaguaDB.KEY_IMAGE_URL, mURL);
+			                	values.put(KaguaDB.KEY_NAME, mNAME);Log.v("KEY_NAME", mNAME);
+			                	values.put(KaguaDB.KEY_PHONE, mPHONE+"10001");Log.v("KEY_PHONE", mPHONE+"10001");
+			                	values.put(KaguaDB.KEY_LAST_VISIT, mVisit);Log.v("KEY_LAST_VISIT", mVisit);
+			                	values.put(KaguaDB.KEY_IMAGE_URL, mURL);Log.v("KEY_IMAGE_URL", mURL);
 			                	KaguaApplication.mDb.populate_home_table(values);
 			                	
-			                	//Remove Logic
-			                	//KaguaApplication.mDb.empty_home_table(mNAME);
 			                	
-			                	 List< HomeViewModel> content =  KaguaApplication.mDb.BuildMainmenu();
-			                	 for (HomeViewModel cn : content) {
-			                		 String logData = "Id: "+cn.getvm_id()+" ,Name: " + cn.getvm_name() + " ,Phone: " + cn.getvm_phone();
-			                		 Log.v("LogData", logData);
-			                		 Log.v("URL", cn.getvm_image_url());
-			                		 
-			                	 }
 			                	
 				    	  } 
 				      });

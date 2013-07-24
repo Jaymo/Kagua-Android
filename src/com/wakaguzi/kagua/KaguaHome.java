@@ -24,6 +24,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.MenuItem;
 import com.wakaguzi.kagua.adapters.ListViewAdapter;
 import com.wakaguzi.kagua.fragments.TestGridFragment;
+import com.wakaguzi.kagua.fragments.TestListFavFragmant;
 import com.wakaguzi.kagua.fragments.TestListFragment;
 import com.wakaguzi.kagua.models.ListViewItemModel;
 import com.wakaguzi.kagua.util.Pref;
@@ -230,7 +231,12 @@ public class KaguaHome extends SActivity {
              LfragmentTransaction.commit();
         	break;
     	case 3:
-    		Toast.makeText(KaguaHome.this, "clicked on Position:-->"+position, Toast.LENGTH_LONG).show();
+    		 FragmentManager YfragmentManager = getSupportFragmentManager();
+    		 FragmentTransaction YfragmentTransaction = YfragmentManager.beginTransaction();
+    		 TestListFavFragmant  Yfragment = new TestListFavFragmant ();
+             YfragmentTransaction.replace(R.id.main, Yfragment);
+             YfragmentTransaction.addToBackStack(null);
+             YfragmentTransaction.commit();
         	break;
     	
     	case 5:

@@ -12,8 +12,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.wakaguzi.kagua.models.HomeViewModel;
-
 public class KaguaDB {
 	
 	public static final String KEY_ID = "id";
@@ -26,7 +24,7 @@ public class KaguaDB {
     
     public static final String KEY_IMAGE_URL = "image_url";
     
-    public static final String[] TBL_HOME_COLUMNS = new String[] {KEY_NAME, KEY_PHONE, KEY_LAST_VISIT,KEY_IMAGE_URL};
+    public static final String[] TBL_HOME_COLUMNS = new String[] {KEY_ID, KEY_NAME, KEY_PHONE, KEY_LAST_VISIT,KEY_IMAGE_URL};
     
     private DatabaseHelper mDbHelper;
 
@@ -171,25 +169,28 @@ public class KaguaDB {
 	    /**
 	     * The Below code will ...chill Kiasi
 	     */
-
-	    public List<HomeViewModel> BuildMainmenu() {
-	        List<HomeViewModel> mmList = new ArrayList<HomeViewModel>();
-	        String sql = "SELECT  * FROM " + HOME_TABLE ;
-	        Cursor cursor = mDb.rawQuery(sql, null);
-	        if (cursor.moveToFirst()) {
-	            do {
-	            	HomeViewModel mm = new HomeViewModel();
-	            	String _name =cursor.getString(1);
-	            	mm.getvm_name();
-	            	mm.getvm_phone(cursor.getString(2));
-	            	mm.getvm_lastvisit(cursor.getString(3));
-	            	mm.getvm_image_url(cursor.getString(4));
-	            	mmList.add(mm);
-	            } while (cursor.moveToNext());
-	        }
-	        Log.v("List", mmList.toString());     
-	        return mmList;
+	    
+	    public List<String[]> selectAll()
+	    {
+	    List<String[]> list = new ArrayList<String[]>();
+	    String sql = "SELECT  * FROM " + HOME_TABLE ;
+        Cursor cursor = mDb.rawQuery(sql, null); 
+	    int x=0;
+	    if (cursor.moveToFirst()) {
+	       do {
+	        String[] b1=new String[]{cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4)}; 
+	       // Log.v("Log214124", b1[0]+b1[1]+b1[2]+b1[3]+b1[4]);
+	        list.add(b1);
+	        x=x+1;
+	       } while (cursor.moveToNext());
 	    }
+	    if (cursor != null && !cursor.isClosed()) {
+	       cursor.close();
+	    } 
+	    cursor.close();
+	    
+	    return list;
+	   }
    
 
 }
