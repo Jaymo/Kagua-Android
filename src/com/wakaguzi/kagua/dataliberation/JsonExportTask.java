@@ -10,45 +10,40 @@ import android.util.Log;
 
 import com.wakaguzi.kagua.KaguaApplication;
 
-
 public class JsonExportTask {
-	
-	public static JSONObject JSONexport(){
-		
+
+	public static JSONObject JSONexport() {
+
 		JSONObject json = new JSONObject();
 		JSONArray valuesarray = new JSONArray();
-		List<String[]> values =null ;
-		
-        values = KaguaApplication.mDb.selectAll();
-     
-        for (String[] name : values) {
-        	JSONObject valuesJson = new JSONObject();
-    		try{
-    		valuesJson.put("id",name[0]); Log.v("id+name[0]", name[0]);
-    		valuesJson.put("name",name[1]); Log.v("name+name[1]", name[1]);
-    		valuesJson.put("tel",name[2]);  Log.v("tel+name[2]", name[2]);
-    		valuesJson.put("lastvisit",name[3]); Log.v("lastvisit+name[3]", name[3]);
-    		valuesJson.put("image_url",name[4]); Log.v("image_url+name[4]", name[4]);
-    		
-    		valuesarray.put(valuesJson); 
-    		}
-    		catch(JSONException e){
-                Log.e("", "Error parsing data "+e.toString());
-            }
-        }
-		
-		try{
+		List<String[]> values = null;
 
-		json.put("PAYLOAD",valuesarray);
+		values = KaguaApplication.mDb.selectAll();
 
+		for (String[] entries : values) {
+			JSONObject valuesJson = new JSONObject();
+			try {
+				valuesJson.put("id", entries[0]);
+				valuesJson.put("name", entries[1]);
+				valuesJson.put("tel", entries[2]);
+				valuesJson.put("lastvisit", entries[3]);
+				valuesJson.put("image_url", entries[4]);
+
+				valuesarray.put(valuesJson);
+			} catch (JSONException e) {
+				Log.e("JsonExportTask", "Error parsing data " + e.toString());
+			}
 		}
-		catch(JSONException e){
-            Log.e("", "Error parsing data "+e.toString());
-        }
-		
 
-		
+		try {
+
+			json.put("PAYLOAD", valuesarray);
+
+		} catch (JSONException e) {
+			Log.e("JsonExportTask", "Error parsing data " + e.toString());
+		}
+
 		return json;
-		
+
 	}
 }

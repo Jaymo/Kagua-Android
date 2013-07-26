@@ -9,7 +9,6 @@ import com.wakaguzi.kagua.data.KaguaDB;
 
 public class KaguaApplication extends Application {
 	 public static KaguaDB mDb;
-	 public static final String TAG = "Kagua";
 	 
 	public KaguaApplication() {
 		Settings.setUseThemeManager(true);

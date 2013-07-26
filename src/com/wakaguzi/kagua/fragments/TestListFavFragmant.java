@@ -13,12 +13,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -38,19 +35,17 @@ public class TestListFavFragmant extends ListFragment {
 	HttpResponse response;
 	HttpClient httpclient;
 	InputStream inputstream;
-	SharedPreferences app_preferences;
 	ArrayList<NameValuePair> namevaluepairs;
 	StringBuilder urlBuilder;
-	String mNAME,res="",mRes="",mDID,mBid,mContact,mCid;
+	String mNAME,res="",mRes="",mContact;
 	ArrayList<HashMap<String, String>> displaylist;
 	ProgressDialog progressDialog;
 	
 	ListView list;
-	Context appContext;
 	String[] values;
 	FavAdapter adaptr;
 	
-	public JSONObject json;
+
 	@Override
 	 public void onCreate(Bundle savedInstanceState) {
 	  super.onCreate(savedInstanceState);
@@ -73,24 +68,19 @@ public class TestListFavFragmant extends ListFragment {
         }
 
         @Override
-        protected String doInBackground(String... param) {  	
-        	
+        protected String doInBackground(String... param) {  		
               displaylist = new ArrayList<HashMap<String, String>>();
               JSONObject json = JsonExportTask.JSONexport();
-              Log.v("jzon", json.toString());
+              
 			  try{
 		      	JSONArray  mot = json.getJSONArray("PAYLOAD");
 			        for(int i=0;i<mot.length();i++){						
 			        	HashMap<String, String> map = new HashMap<String, String>();		
 						JSONObject e = mot.getJSONObject(i);
 						map.put(KEY_NAME, e.getString(KEY_NAME));
-						Log.i("KEY_NAME", KEY_NAME);
 						map.put(KEY_PHONE, e.getString(KEY_PHONE));
-						Log.i("KEY_PHONE",KEY_PHONE);
 						map.put(KEY_LAST_VISIT, e.getString(KEY_LAST_VISIT));
-						Log.i("KEY_LAST_VISIT", KEY_LAST_VISIT);
 					    map.put(KEY_IMAGE_URL, e.getString(KEY_IMAGE_URL));
-						Log.i("KEY_IMAGE_URL", KEY_IMAGE_URL);
 					    displaylist.add(map);
 					}		
 		      }catch(JSONException e)      {

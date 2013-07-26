@@ -32,7 +32,7 @@ public class KaguaDB {
     
     private static final int DATABASE_VERSION = 1;
 
-    private static final String DATABASE_NAME = "Kagua_db";
+    private static final String DATABASE_NAME = "Kagua_DB";
 
     private static final String HOME_TABLE = "home";
     
@@ -108,7 +108,7 @@ public class KaguaDB {
 	     * Credits http://goo.gl/7kOpU
 	     * @param db
 	     * @param tableName
-	     * @return
+	     * @return List<String>
 	     */
 	    public static List<String> getColumns(SQLiteDatabase db, String tableName) {
 	    	Log.v("List<String>", tableName);
@@ -167,7 +167,9 @@ public class KaguaDB {
 	    
 	    
 	    /**
-	     * The Below code will ...chill Kiasi
+	     * The Below code will ...Export a List Array from Home_Table
+	     * @param
+	     * @return List<String[]>
 	     */
 	    
 	    public List<String[]> selectAll()
@@ -179,7 +181,6 @@ public class KaguaDB {
 	    if (cursor.moveToFirst()) {
 	       do {
 	        String[] b1=new String[]{cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4)}; 
-	       // Log.v("Log214124", b1[0]+b1[1]+b1[2]+b1[3]+b1[4]);
 	        list.add(b1);
 	        x=x+1;
 	       } while (cursor.moveToNext());

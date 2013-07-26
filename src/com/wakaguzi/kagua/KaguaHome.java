@@ -3,7 +3,6 @@ package com.wakaguzi.kagua;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.ActivityCompat;
@@ -11,7 +10,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -30,14 +28,15 @@ import com.wakaguzi.kagua.models.ListViewItemModel;
 import com.wakaguzi.kagua.util.Pref;
 
 public class KaguaHome extends SActivity {
-	
+	public static  String SENDER_ID = "";
 	private DrawerLayout drawerLayout = null;
 	private ListView navList = null;
 	private ActionBarDrawerToggle drawerToggle = null;
 	ProgressDialog dialog;
 	private String[] menuItemsCategories;
 	private String[] menuItemsApplication;
-   
+	FragmentManager AfragmentManager,BfragmentManager,CfragmentManager;
+	FragmentTransaction AfragmentTransaction,BfragmentTransaction,CfragmentTransaction;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +74,9 @@ public class KaguaHome extends SActivity {
 			navList.setItemChecked(1, true);
         }
 		
-		 //new TestManeno().execute();
 		
 		if (savedInstanceState == null) {
-            selectItem(2);
+            selectItem(1);
         }
 		
 		Pref.loadSettings(KaguaHome.this);
@@ -98,36 +96,6 @@ public class KaguaHome extends SActivity {
 	public void setLightDarkActionBarTheme(View v) {
 		ThemeManager.restartWithTheme(this, ThemeManager.LIGHT_WITH_DARK_ACTION_BAR
 				| ThemeManager.FULLSCREEN);
-	}
-	
-	
-	public class TestManeno extends  AsyncTask<Integer, Integer, Integer> {
-		protected void onPreExecute() {
-			dialog = new ProgressDialog(KaguaHome.this); 
-			dialog.setProgressStyle(R.style.NewDialog);
-			dialog.setIndeterminate(true);
-			dialog.setIndeterminateDrawable(getResources().getDrawable(R.drawable.progress_dialog_icon_drawable_animation));
-			dialog.show();
-		}
-		
-		@Override
-		 protected Integer doInBackground(Integer... arg0) {
-			try{ 
-				Thread.sleep(88000); 
-				}
-			catch(InterruptedException e)
-			{ 
-				
-			}
-			return null;
-			
-		}
-		@Override
-		protected void onPostExecute(Integer result) {
-			dialog.dismiss();
-		}
-		
-		
 	}
 	
 
@@ -214,42 +182,42 @@ public class KaguaHome extends SActivity {
     	
     	switch (position){
     	case 1:
-    		 FragmentManager fragmentManager = getSupportFragmentManager();
-    		 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-    		 TestGridFragment fragment = new TestGridFragment();
-             fragmentTransaction.replace(R.id.main, fragment);
-             fragmentTransaction.addToBackStack(null);
-             fragmentTransaction.commit();
+    		 AfragmentManager = getSupportFragmentManager();
+    		 AfragmentTransaction = AfragmentManager.beginTransaction();
+    		 TestGridFragment Afragment = new TestGridFragment();
+    		 AfragmentTransaction.replace(R.id.main, Afragment);
+    		 AfragmentTransaction.addToBackStack(null);
+    		 AfragmentTransaction.commit();
              
     	break;
     	case 2:
-    		 FragmentManager LfragmentManager = getSupportFragmentManager();
-    		 FragmentTransaction LfragmentTransaction = LfragmentManager.beginTransaction();
-    		 TestListFragment  Lfragment = new TestListFragment ();
-             LfragmentTransaction.replace(R.id.main, Lfragment);
-             LfragmentTransaction.addToBackStack(null);
-             LfragmentTransaction.commit();
+    		 BfragmentManager = getSupportFragmentManager();
+    		 BfragmentTransaction = BfragmentManager.beginTransaction();
+    		 TestListFragment  Bfragment = new TestListFragment ();
+    		 BfragmentTransaction.replace(R.id.main, Bfragment);
+    		 BfragmentTransaction.addToBackStack(null);
+    		 BfragmentTransaction.commit();
         	break;
     	case 3:
-    		 FragmentManager YfragmentManager = getSupportFragmentManager();
-    		 FragmentTransaction YfragmentTransaction = YfragmentManager.beginTransaction();
-    		 TestListFavFragmant  Yfragment = new TestListFavFragmant ();
-             YfragmentTransaction.replace(R.id.main, Yfragment);
-             YfragmentTransaction.addToBackStack(null);
-             YfragmentTransaction.commit();
+    		 CfragmentManager = getSupportFragmentManager();
+    		 CfragmentTransaction = CfragmentManager.beginTransaction();
+    		 TestListFavFragmant  Cfragment = new TestListFavFragmant ();
+    		 CfragmentTransaction.replace(R.id.main, Cfragment);
+    		 CfragmentTransaction.addToBackStack(null);
+    		 CfragmentTransaction.commit();
         	break;
     	
     	case 5:
-    		Toast.makeText(KaguaHome.this, "clicked on Position:-->"+position, Toast.LENGTH_LONG).show();
+    		Toast.makeText(KaguaHome.this, "Display Settings Fragment"+position, Toast.LENGTH_LONG).show();
         	break;
     	case 6:
-    		makeDialog();
+    		ThemeDialog();
         	break;
     	case 7:
-    		Toast.makeText(KaguaHome.this, "clicked on Position:-->"+position, Toast.LENGTH_LONG).show();
+    		Toast.makeText(KaguaHome.this, "Display About Fragment"+position, Toast.LENGTH_LONG).show();
         	break;
     	case 8:
-    		Toast.makeText(KaguaHome.this, "clicked on Position:-->"+position, Toast.LENGTH_LONG).show();
+    		Toast.makeText(KaguaHome.this, "Display FeedBack Fragment"+position, Toast.LENGTH_LONG).show();
         	break;
         	
     	
@@ -259,12 +227,11 @@ public class KaguaHome extends SActivity {
     	drawerLayout.closeDrawer(navList);
     }
     
-    private void makeDialog() {
+    private void ThemeDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(KaguaHome.this);
-        builder.setTitle("Pick A Theme");
+        builder.setTitle("Pick a Theme");
         builder.setSingleChoiceItems(R.array.themes, Pref.selectedtheme, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-            	Log.v("Theme Selected",which+"");
             	
             	Pref.loadSettings(KaguaHome.this);
             	Pref.selectedtheme=which;
