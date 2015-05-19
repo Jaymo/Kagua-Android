@@ -24,6 +24,6 @@
     <string name="application_menu_data_feedback">FeedBack</string>
     
     <!-- Data Feeds URIs -->
-    <string name="URL">http://197.254.42.106:85/crown/ws/bootstrap.php</string> <!-- Test Data Feed :-) -->
+    <string name="URL"></string> <!-- Test Data Feed :-) -->
     
 </resources>
